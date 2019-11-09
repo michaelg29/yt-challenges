@@ -1,0 +1,4 @@
+﻿  dictionary.c
+C:\src\yt-challenges\dictionary\dictionary\dictionary.c(68): warning C4142: 'size': benign redefinition of type
+  C:\src\yt-challenges\dictionary\dictionary\dictionary.h(9): note: see declaration of 'size'
+  dictionary.vcxproj -> C:\src\yt-challenges\dictionary\dictionary\Debug\dictionary.exe
