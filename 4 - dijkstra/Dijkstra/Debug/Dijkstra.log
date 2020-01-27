@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\src\yt-challenges\4 - dijkstra\Dijkstra\main.cpp(200): warning C4715: 'calculateDistance': not all control paths return a value
+  Dijkstra.vcxproj -> C:\src\yt-challenges\4 - dijkstra\Dijkstra\Debug\Dijkstra.exe
