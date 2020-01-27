@@ -9,3 +9,4 @@ Number | Name | Language | Important topics
 1 | Spell-Checker | C | Trie, Tree, Recursion
 2 | Shunting-Yard Algorithm | JavaScript | Recursion, Parsing Strings, Reverse Polish Notation, Trees
 3 | Graphing Calculator | HTML/JavaScript | Canvas, Graphics, UI Controls, GitHub Pages
+3 | Dijkstra's Algorithm | C++ | Recursion, Parallel Arrays, typedef, namespace, Path Finding, 2D Arrays
