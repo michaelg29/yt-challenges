@@ -1,0 +1,6 @@
+﻿  json_data.cpp
+C:\src\yt-challenges\6 - JSON\JSON\json_data.cpp(97): warning C4018: '<': signed/unsigned mismatch
+C:\src\yt-challenges\6 - JSON\JSON\json_data.cpp(183): warning C4018: '<': signed/unsigned mismatch
+C:\src\yt-challenges\6 - JSON\JSON\json_data.cpp(188): warning C4018: '<': signed/unsigned mismatch
+C:\src\yt-challenges\6 - JSON\JSON\json_data.cpp(25): warning C4715: 'json::json_data::getType': not all control paths return a value
+  JSON.vcxproj -> C:\src\yt-challenges\6 - JSON\JSON\Debug\JSON.exe
