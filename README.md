@@ -13,3 +13,4 @@ Number | Name | Language | Important topics
 5 | RSA Encryption Algorithm | Python | Primality Test, Modular Exponentiation, Modular Multiplicative Inverse, One-way Function
 6 | JSON Evaluation | C++ | String parsing, data storage, delimeters, passing by reference, namespace, inheritance
 7 | Node Class | C++ | Nodes, recursion, trees, practicality, pointers, dereferencing
+8 | DLL Libraries | C++ | Libraries, DLL, Runtime, Include
