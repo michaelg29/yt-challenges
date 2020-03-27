@@ -14,3 +14,4 @@ Number | Name | Language | Important topics
 6 | JSON Evaluation | C++ | String parsing, data storage, delimeters, passing by reference, namespace, inheritance
 7 | Node Class | C++ | Nodes, recursion, trees, practicality, pointers, dereferencing
 8 | DLL Libraries | C++ | Libraries, DLL, Runtime, Include
+9 | JSON Packaging | C++ | .hpp files, condensing, packaging, release
