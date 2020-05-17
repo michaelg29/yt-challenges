@@ -15,3 +15,4 @@ Number | Name | Language | Important topics
 7 | Node Class | C++ | Nodes, recursion, trees, practicality, pointers, dereferencing
 8 | DLL Libraries | C++ | Libraries, DLL, Runtime, Include
 9 | JSON Packaging | C++ | .hpp files, condensing, packaging, release
+10 | Shunting-Yard Algorithm | C++ | Recursion, Parsing Strings, Reverse Polish Notation, Trees, Stacks
