@@ -16,3 +16,4 @@ Number | Name | Language | Important topics
 8 | DLL Libraries | C++ | Libraries, DLL, Runtime, Include
 9 | JSON Packaging | C++ | .hpp files, condensing, packaging, release
 10 | Shunting-Yard Algorithm | C++ | Recursion, Parsing Strings, Reverse Polish Notation, Trees, Stacks
+11 | Number Base Conversions | C++ | Number bases, binary, decimal, hexadecimal
