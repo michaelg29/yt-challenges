@@ -17,3 +17,4 @@ Number | Name | Language | Important topics
 9 | JSON Packaging | C++ | .hpp files, condensing, packaging, release
 10 | Shunting-Yard Algorithm | C++ | Recursion, Parsing Strings, Reverse Polish Notation, Trees, Stacks
 11 | Number Base Conversions | C++ | Number bases, binary, decimal, hexadecimal
+12 | Bitwise Operators | C++ | Bitwise AND, OR, NOT, XOR, shifters, bit manipulation
