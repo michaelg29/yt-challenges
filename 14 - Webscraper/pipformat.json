@@ -1,0 +1,45 @@
+{
+    "url": {
+        "domain": "https://pypi.org",
+        "actions": {
+            "project": {
+                "route": "/project/{name}",
+                "params": [
+                    "name"
+                ]
+            },
+            "search": {
+                "route": "/search",
+                "query": {
+                    "term": {
+                        "title": "q"
+                    },
+                    "sort": {
+                        "title": "o",
+                        "vals": [
+                            "",
+                            "-created",
+                            "-zscore"
+                        ],
+                        "default": ""
+                    },
+                    "page": {
+                        "title": "page"
+                    }
+                }
+            }
+        }
+    },
+    "data": {
+        "project": {
+            "name": "h1.package-header__name",
+            "pip-instructions": "p.package-header__pip-instructions > span#pip-command",
+            "release-date": "p.package-header__date",
+            "brief": "div.package-description > p.package-description__summary"
+        },
+        "search": {
+            "page-btns": "div.button-group--pagination > *a.button-group__button",
+            "results": "ul[aria-label='Search results'] > *li > a{href}.package-snippet"
+        }
+    }
+}
