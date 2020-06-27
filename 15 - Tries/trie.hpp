@@ -19,13 +19,13 @@ namespace trie {
 	};
 
 	// charsets for keys
-	std::vector<Range> ascii_letters = { { 'A', 'Z' }, { 'a', 'z' } };
-	std::vector<Range> ascii_lowercase = { { 'a', 'z' } };
-	std::vector<Range> ascii_uppercase = { { 'A', 'Z' } };
-	std::vector<Range> digits = { { '0', '9' } };
-	std::vector<Range> alpha_numeric = { { '0', '9' }, { 'A', 'Z' }, { 'a', 'z' } };
-
 	typedef std::vector<Range> charset;
+	
+	const charset ascii_letters = { { 'A', 'Z' }, { 'a', 'z' } };
+	const charset ascii_lowercase = { { 'a', 'z' } };
+	const charset ascii_uppercase = { { 'A', 'Z' } };
+	const charset digits = { { '0', '9' } };
+	const charset alpha_numeric = { { '0', '9' }, { 'A', 'Z' }, { 'a', 'z' } };
 
 	/*
 		trie node structure
