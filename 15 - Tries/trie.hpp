@@ -63,7 +63,7 @@ namespace trie {
 		/*
 			constructor
 		*/
-		Trie(charset chars)
+		Trie(charset chars = alpha_numeric)
 			: chars(chars), noChars(0), root(nullptr) {
 			// set number of chars
 			for (Range r : chars) {
@@ -97,7 +97,7 @@ namespace trie {
 					// child doesn't exist yet
 					current->children[idx] = new node<T>;
 					current->children[idx]->exists = false;
-					current->children[idx]->children = new node<T> * [noChars];
+					current->children[idx]->children = new node<T>*[noChars];
 					for (int i = 0; i < noChars; i++) {
 						current->children[idx]->children[i] = NULL;
 					}
@@ -114,30 +114,20 @@ namespace trie {
 
 		// deletion method
 		bool erase(std::string key) {
-			// TODO: do not clear node
 			if (!root) {
 				return false;
 			}
 
-			int idx;
-			node<T>* current = root;
-
-			for (char c : key) {
-				idx = getIdx(c);
-				if (idx == -1) {
+			// pass lambda function that sets target element->exists to false
+			return findKey<bool>(key, [](node<T>* element) -> bool {
+				if (!element) {
+					// element is nullptr
 					return false;
 				}
-				if (!current->children[idx] || current->children[idx] == NULL) {
-					// child not found
-					return false;
-				}
-				current = current->children[idx];
-			}
 
-			current->data = nullptr;
-			current->exists = false;
-
-			return true;
+				element->exists = false;
+				return true;
+			});
 		}
 
 		// release root note
