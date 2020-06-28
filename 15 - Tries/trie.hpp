@@ -18,9 +18,9 @@ namespace trie {
 		}
 	};
 
-	// charsets for keys
 	typedef std::vector<Range> charset;
-	
+
+	// charsets for keys
 	const charset ascii_letters = { { 'A', 'Z' }, { 'a', 'z' } };
 	const charset ascii_lowercase = { { 'a', 'z' } };
 	const charset ascii_uppercase = { { 'A', 'Z' } };
@@ -46,7 +46,7 @@ namespace trie {
 			// iterate through children
 			if (children) {
 				for (int i = 0; i < noChildren; i++) {
-					if (children[i] != NULL) {
+					if (children[i]) {
 						children[i]->traverse(itemViewer, noChildren);
 					}
 				}
@@ -73,7 +73,7 @@ namespace trie {
 			// initialize root memory
 			root = new node<T>;
 			root->exists = false;
-			root->children = new node<T>*[noChars];
+			root->children = new node<T> * [noChars];
 			for (int i = 0; i < noChars; i++) {
 				root->children[i] = NULL;
 			}
@@ -93,11 +93,11 @@ namespace trie {
 				if (idx == -1) {
 					return false;
 				}
-				if (!current->children[idx] || current->children[idx] == NULL) {
+				if (!current->children[idx]) {
 					// child doesn't exist yet
 					current->children[idx] = new node<T>;
 					current->children[idx]->exists = false;
-					current->children[idx]->children = new node<T>*[noChars];
+					current->children[idx]->children = new node<T> * [noChars];
 					for (int i = 0; i < noChars; i++) {
 						current->children[idx]->children[i] = NULL;
 					}
@@ -197,7 +197,7 @@ namespace trie {
 
 				// update current
 				current = current->children[idx];
-				if (current == NULL) {
+				if (!current) {
 					// leave to parameter function to deal with nullptr
 					return process(nullptr);
 				}
