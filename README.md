@@ -21,3 +21,4 @@ Number | Name | Language | Important topics
 13 | SpaceX Launches Mobile App | JavaScript (React Native) | RN App Creation, React Navigation, Networking, Styling, JS Dates, JSON Data
 14 | Webscraper | Python | Regex, Beautiful Soup 4, HTML Parsing, CSS Selectors, element trees, data parsing
 15 | Trie | C++ | Trie, Tree, Recursion, Data Structures, Lambda Functions, Data Storage/Access, Memory Management
+16 | Electron.js Library | JavaScript | Electron.js, Node.js, cross platform desktop apps, IPC, Electron app Architecture
