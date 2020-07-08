@@ -22,3 +22,4 @@ Number | Name | Language | Important topics
 14 | Webscraper | Python | Regex, Beautiful Soup 4, HTML Parsing, CSS Selectors, element trees, data parsing
 15 | Trie | C++ | Trie, Tree, Recursion, Data Structures, Lambda Functions, Data Storage/Access, Memory Management
 16 | Electron.js Library | JavaScript | Electron.js, Node.js, cross platform desktop apps, IPC, Electron app Architecture
+17 | B-Tree | C++ | Tree, Databases, Data Structures, Recursion, Reverse Recursion, Memory Management
