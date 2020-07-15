@@ -23,8 +23,21 @@ int main() {
 	}
 
 	tree.traverse([](data* element) -> void {
-		std::cout << element->key << ' ' << element->name << std::endl;
+		std::cout << element->key << ' ';
 	});
+	std::cout << std::endl;
+
+	tree.erase(30);
+	tree.erase(10);
+	tree.erase(60);
+	tree.erase(50);
+
+	tree.traverse([](data* element) -> void {
+		std::cout << element->key << ' ';
+	});
+	std::cout << std::endl;
+
+	std::cout << tree.root->data[1]->key << std::endl;
 
 	tree.clear();
 
