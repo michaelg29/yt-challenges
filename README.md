@@ -24,3 +24,4 @@ Number | Name | Language | Important topics
 16 | Electron.js Library | JavaScript | Electron.js, Node.js, cross platform desktop apps, IPC, Electron app Architecture
 17 | B-Tree | C++ | Tree, Databases, Data Structures, Recursion, Reverse Recursion, Memory Management
 18 | BMP Images | C++ | C++ File IO, BMP file structure, pointers, structures, typdef
+19 | Perlin Noise | C++ | Graphics, procedural generation, pseudorandom, gradients, vectors, textures, realism
