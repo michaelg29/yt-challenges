@@ -25,3 +25,4 @@ Number | Name | Language | Important topics
 17 | B-Tree | C++ | Tree, Databases, Data Structures, Recursion, Reverse Recursion, Memory Management
 18 | BMP Images | C++ | C++ File IO, BMP file structure, pointers, structures, typdef
 19 | Perlin Noise | C++ | Graphics, procedural generation, pseudorandom, gradients, vectors, textures, realism
+20 | MP3/ID3 | C++ | C++ File IO, metadata, memory copying/manipulation
