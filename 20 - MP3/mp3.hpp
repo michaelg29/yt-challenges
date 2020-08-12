@@ -12,7 +12,13 @@
 
 class MP3 {
 public:
-	MP3() {}
+	/*
+		constructors
+	*/
+
+	// default
+	MP3() 
+		: hasID3v1(false), hasID3v2(false) {}
 
 	/*
 		input output methods
@@ -104,6 +110,8 @@ public:
 
 	// write out mp3 file
 	bool write(const char* path) {
+		recalcID3v2Size();
+
 		std::ofstream file(path, std::ios::out | std::ios::binary | std::ios::ate);
 
 		if (!file.is_open()) {
@@ -174,15 +182,22 @@ public:
 			startIdx = id3v2Data[tag].size();
 		}
 
+		bool recalcSize = false;
+
 		for (int i = startIdx; i < startIdx + insertLength; i++) {
 			if (i >= id3v2Data[tag].size()) {
 				// add to end
+				recalcSize = true;
 				id3v2Data[tag].push_back(data[i - startIdx]);
 			}
 			else {
 				// reset existing character
 				id3v2Data[tag][i] = data[i - startIdx];
 			}
+		}
+
+		if (recalcSize) {
+			recalcID3v2Size();
 		}
 
 		return true;
@@ -193,6 +208,8 @@ public:
 		if (id3v2Data.find(tag) == id3v2Data.end()) {
 			return false;
 		}
+
+		bool recalcSize = true;
 
 		// shift data
 		/*
@@ -220,26 +237,43 @@ public:
 				id3v2Data[tag][i + shift] = id3v2Data[tag][i];
 			}
 		}
+		else {
+			recalcSize = false;
+		}
 
 		// insert new data
 		for (int i = startIdx; i < startIdx + insertLen; i++) {
 			id3v2Data[tag][i] = data[i - startIdx];
 		}
 
+		if (recalcSize) {
+			recalcID3v2Size();
+		}
+
 		return true;
 	}
 
 private:
+	// data buffer
 	std::vector<char> data;
 
+	// whether or not id3v1 data was detected
 	bool hasID3v1;
+	// id3v1 data structure
 	ID3::ID3v1 id3v1;
 
+	// whether or not id3v2 data was detected
 	bool hasID3v2;
+	// id3v2 header structure
 	ID3::ID3v2 id3v2;
-
+	// id3v2 data map
 	std::map<std::string, std::vector<char>> id3v2Data;
 
+	/*
+		private utility methods
+	*/
+
+	// method to process id3v2 body
 	void processID3v2() {
 		id3v2Data.clear();
 
@@ -324,6 +358,35 @@ private:
 
 			file.close();
 		}*/
+	}
+
+	// method to recalculate size of id3v2 body
+	void recalcID3v2Size() {
+		if (!hasID3v2) {
+			return;
+		}
+
+		// get size in bytes
+		unsigned int size = 0;
+		for (std::pair<std::string, std::vector<char>> pair : id3v2Data) {
+			size += pair.first.size() + pair.second.size();
+		}
+
+		// clear current size
+		for (int i = 0; i < 4; i++) {
+			id3v2.size[i] = 0;
+		}
+
+		unsigned int extractor = 0b01111111;
+
+		// convert into synchsafe integers (28 bits)
+		for (int i = 0; i < 4; i++) {
+			id3v2.size[3 - i] = (size & extractor) >> (7 * i);
+
+			extractor <<= 7;
+		}
+
+		return;
 	}
 };
 
