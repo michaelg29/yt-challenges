@@ -34,7 +34,7 @@ namespace ShuntingYard {
 	/*
 		Utility function callbacks
 	*/
-	
+
 	// determine if vector contains values
 	template<typename T>
 	bool contains(std::vector<T> v, T x);
@@ -349,7 +349,7 @@ namespace ShuntingYard {
 		std::stack<Node*> stack;
 
 		for (std::string item : rpn) {
-			if (isNumber(item.c_str()) && item != "-") {
+			if (isNumber(item.c_str())) {
 				// push number node
 				stack.push(new NumNode(item));
 			}
@@ -454,12 +454,15 @@ namespace ShuntingYard {
 	bool isNumber(const char* str) {
 		return contains<std::string>(constantNames, str) ||
 			contains<std::string>(keys<double>(variables), str) ||
-			std::strcmp(str, ".") == 0 ||
 			containsNumbers(str);
 	}
 
 	// determine if string only contains numerical characters
 	bool containsNumbers(const char* str) {
+		if (std::strcmp(str, ".") == 0 || std::strcmp(str, "-") == 0) {
+			return false;
+		}
+
 		// try to prove wrong
 		bool acceptDecimal = true;
 		bool acceptNegative = true;
