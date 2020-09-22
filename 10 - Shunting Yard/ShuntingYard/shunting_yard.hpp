@@ -48,7 +48,7 @@ namespace ShuntingYard {
 	std::vector<std::string> keys(std::map<std::string, T> m1, std::map<std::string, T> m2);
 
 	// determine if character is number
-	bool isNumber(char c);
+	bool isNumber(char c, bool acceptDecimal = true, bool acceptNegative = true);
 
 	// determine if entire string is number
 	bool isNumber(const char* str);
@@ -214,23 +214,32 @@ namespace ShuntingYard {
 		TokenTypes type = TokenTypes::ELSE;
 		TokenTypes prevType = TokenTypes::ELSE; // negative sign detection
 
+		bool acceptDecimal = true;
+		bool acceptNegative = true;
+
 		// token reading and detection
 		for (int i = 0, eqLen = (int)strlen(eqn); i < eqLen; i++) {
 			char t = eqn[i];
 
 			// skip spaces and commas
 			if (t == ' ' || t == ',') {
-				prevType = TokenTypes::ELSE;
+				//prevType = TokenTypes::ELSE;
 				continue;
 			}
 
 			// classify token
 			if (isNumber(t)) {
 				type = TokenTypes::CONSTANT;
+				if (t == '.') {
+					acceptDecimal = false;
+				}
+				else if (t == '-') {
+					acceptNegative = false;
+				}
 
 				int startI = i;
 				if (i < eqLen - 1) {
-					while (isNumber(eqn[i + 1])) {
+					while (isNumber(eqn[i + 1], acceptDecimal, acceptNegative)) {
 						i++;
 						if (i >= eqLen - 1) {
 							break;
@@ -240,7 +249,7 @@ namespace ShuntingYard {
 				obj = std::string(eqn).substr(startI, i - startI + 1);
 
 				// subtraction sign detection
-				if (obj == "-" && prevType != TokenTypes::RPAREN && prevType != TokenTypes::OPERATOR) {
+				if (obj == "-") {
 					type = TokenTypes::OPERATOR;
 				}
 			}
@@ -290,12 +299,12 @@ namespace ShuntingYard {
 				if (stack.size() != 0) {
 					while (
 						(
-							(contains<std::string>(functionNames, last_stack) && 
+							(contains<std::string>(functionNames, last_stack) &&
 								!contains<char>(operators, last_stack[0])) ||
 							getPrecedence(last_stack) > getPrecedence(obj) ||
 							((getPrecedence(last_stack) == getPrecedence(obj)) &&
 								isLeftAssociative(last_stack))
-						) &&
+							) &&
 						!contains<char>(leftBrackets, last_stack[0])
 						) {
 						queue.push_back(stack.top());
@@ -340,7 +349,7 @@ namespace ShuntingYard {
 		std::stack<Node*> stack;
 
 		for (std::string item : rpn) {
-			if (isNumber(item.c_str())) {
+			if (isNumber(item.c_str()) && item != "-") {
 				// push number node
 				stack.push(new NumNode(item));
 			}
@@ -427,10 +436,18 @@ namespace ShuntingYard {
 	}
 
 	// determine if character is number
-	bool isNumber(char c) {
-		return c == '.' ||
-			(int(c) >= int('0') && int(c) <= int('9')) ||
-			c == '-';
+	bool isNumber(char c, bool acceptDecimal, bool acceptNegative) {
+		if (c >= '0' && c <= '9') {
+			return true;
+		}
+		else if (acceptDecimal && c == '.') {
+			return true;
+		}
+		else if (acceptNegative && c == '-') {
+			return true;
+		}
+
+		return false;
 	}
 
 	// determine if entire string is number
@@ -444,9 +461,17 @@ namespace ShuntingYard {
 	// determine if string only contains numerical characters
 	bool containsNumbers(const char* str) {
 		// try to prove wrong
+		bool acceptDecimal = true;
+		bool acceptNegative = true;
 		for (char c : std::string(str)) {
-			if (!isNumber(c)) {
+			if (!isNumber(c, acceptDecimal, acceptNegative)) {
 				return false;
+			}
+
+			if (c == '.') {
+				acceptDecimal = false;
+			} if (c == '-') {
+				acceptNegative = false;
 			}
 		}
 
