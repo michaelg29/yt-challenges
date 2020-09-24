@@ -298,6 +298,22 @@ namespace ShuntingYard {
 			case TokenTypes::OPERATOR:
 				if (stack.size() != 0) {
 					while (
+						/*
+							stk = stack top = last_stack
+							obj = obj
+
+										stk is a function
+									AND
+										stk is not an operator
+								OR
+									stk has a higher precedence than obj
+								OR
+										they have equal precedence
+									AND
+										stk is left associative
+							AND
+								stk is not a left bracket
+						*/
 						(
 							(contains<std::string>(functionNames, last_stack) &&
 								!contains<char>(operators, last_stack[0])) ||
@@ -307,6 +323,7 @@ namespace ShuntingYard {
 							) &&
 						!contains<char>(leftBrackets, last_stack[0])
 						) {
+						// pop from the stack to the queue
 						queue.push_back(stack.top());
 						stack.pop();
 						if (stack.size() == 0) {
@@ -322,6 +339,7 @@ namespace ShuntingYard {
 				break;
 			case TokenTypes::RPAREN:
 				while (last_stack[0] != '(') {
+					// pop from the stack to the queue
 					queue.push_back(stack.top());
 					stack.pop();
 					last_stack = stack.top().c_str();
@@ -337,6 +355,7 @@ namespace ShuntingYard {
 		}
 
 		while (stack.size() > 0) {
+			// pop from the stack to the queue
 			queue.push_back(stack.top());
 			stack.pop();
 		}
@@ -359,8 +378,12 @@ namespace ShuntingYard {
 				if (contains<std::string>(keys(binary_functions), item)) {
 					f->setUnary(false);
 					// set children of node
+
+					// right child is second argument
 					f->right = stack.top();
 					stack.pop();
+
+					// left child is first argument
 					f->left = stack.top();
 					stack.pop();
 				}
@@ -374,11 +397,11 @@ namespace ShuntingYard {
 			}
 		}
 
-		if (stack.size() == 0) {
-			return nullptr;
-		}
+if (stack.size() == 0) {
+	return nullptr;
+}
 
-		return stack.top();
+return stack.top();
 	}
 
 	// evaluate tree
@@ -386,9 +409,11 @@ namespace ShuntingYard {
 		if (tree->isFunc) {
 			FuncNode* ftree = (FuncNode*)tree;
 			if (ftree->isUnary) {
+				// evaluate child recursively and then evaluate with return value
 				return ftree->eval(eval(tree->left));
 			}
 			else {
+				// evaluate each child recursively and then evaluate with return value
 				return ftree->eval(eval(tree->left), eval(tree->right));
 			}
 		}
@@ -437,12 +462,15 @@ namespace ShuntingYard {
 
 	// determine if character is number
 	bool isNumber(char c, bool acceptDecimal, bool acceptNegative) {
+		// digits
 		if (c >= '0' && c <= '9') {
 			return true;
 		}
+		// decimal point
 		else if (acceptDecimal && c == '.') {
 			return true;
 		}
+		// negative sign
 		else if (acceptNegative && c == '-') {
 			return true;
 		}
@@ -452,6 +480,7 @@ namespace ShuntingYard {
 
 	// determine if entire string is number
 	bool isNumber(const char* str) {
+		// it's a constant, variable, or a numerical string
 		return contains<std::string>(constantNames, str) ||
 			contains<std::string>(keys<double>(variables), str) ||
 			containsNumbers(str);
@@ -459,22 +488,35 @@ namespace ShuntingYard {
 
 	// determine if string only contains numerical characters
 	bool containsNumbers(const char* str) {
+		// cannot be a single decimal point or negative sign
 		if (std::strcmp(str, ".") == 0 || std::strcmp(str, "-") == 0) {
 			return false;
 		}
 
+		std::string obj = std::string(str);
+
 		// try to prove wrong
 		bool acceptDecimal = true;
-		bool acceptNegative = true;
-		for (char c : std::string(str)) {
-			if (!isNumber(c, acceptDecimal, acceptNegative)) {
+		if (isNumber(obj[0], true, true)) {
+			// check first character for negative sign
+			if (obj[0] == '.') {
+				// cannot be any more decimal points
+				acceptDecimal = false;
+			}
+		}
+		else {
+			return false;
+		}
+		
+		for (unsigned int i = 1, len = obj.size(); i < len; i++) {
+			// do not accept anymore negative signs
+			if (!isNumber(obj[i], acceptDecimal, false)) {
 				return false;
 			}
 
-			if (c == '.') {
+			if (obj[i] == '.') {
+				// cannot be any more decimal points
 				acceptDecimal = false;
-			} if (c == '-') {
-				acceptNegative = false;
 			}
 		}
 
@@ -484,12 +526,15 @@ namespace ShuntingYard {
 	// get numerical value of string
 	double getNumericalVal(const char* str) {
 		if (contains<std::string>(constantNames, str)) {
+			// is a constant
 			return constants[str];
 		}
 		else if (contains<std::string>(keys<double>(variables), str)) {
+			// is a variable
 			return variables[str];
 		}
 		else {
+			// is a number
 			return std::atof(str);
 		}
 	}
@@ -510,6 +555,7 @@ namespace ShuntingYard {
 			return binary_functions[str].prec;
 		}
 
+		// only care about operators, which are binary functions, so otherwise we can return 0
 		return 0;
 	}
 
