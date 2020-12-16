@@ -27,3 +27,4 @@ Number | Name | Language | Important topics
 19 | Perlin Noise | C++ | Graphics, procedural generation, pseudorandom, gradients, vectors, textures, realism
 20 | MP3/ID3 | C++ | C++ File IO, metadata, memory copying/manipulation
 21 | Connect Four | Java | Recursion, Scanner IO, Arrays, Enums, Classes, Efficiency
+22 | Generic Lists | C/C++ | Linked lists, Dynamic arrays, memory allocation, pointers, efficiency
