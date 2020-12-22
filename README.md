@@ -28,4 +28,5 @@ Number | Name | Language | Important topics
 20 | MP3/ID3 | C++ | C++ File IO, metadata, memory copying/manipulation
 21 | Connect Four | Java | Recursion, Scanner IO, Arrays, Enums, Classes, Efficiency
 22 | Generic Lists | C/C++ | Linked lists, Dynamic arrays, memory allocation, pointers, efficiency
-23 | Generic Hash Maps | C/C++ | Hash Maps, Buckets, Hash Functions, Memory allocation, pointers, efficiency
+23 | Generic Min Heap | C/C++ | Minimum heaps, priority queue, memory allocation, pointers
+24 | Generic Hash Maps | C/C++ | Hash Maps, Buckets, Hash Functions, Memory allocation, pointers, efficiency
