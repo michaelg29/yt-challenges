@@ -14,5 +14,8 @@
 ## Running
 `py main.py apiPath.txt transactions.csv`
 
+Or, to load up the main menu:
+`py main.py apiPath.txt`
+
 *Replace apiPath.txt with the path to the file containing your API Key.*
 *Replace transactions.csv with the path to the file containing your transaction data.*
