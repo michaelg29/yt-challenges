@@ -30,3 +30,4 @@ Number | Name | Language | Important topics
 22 | Generic Lists | C/C++ | Linked lists, Dynamic arrays, memory allocation, pointers, efficiency
 23 | Generic Min Heap | C/C++ | Minimum heaps, priority queue, memory allocation, pointers
 24 | Generic Hash Maps | C/C++ | Hash Maps, Buckets, Hash Functions, Memory allocation, pointers, efficiency
+25 | Command Line Stocks | Python | APIs, Networking, JSON Parsing, CSV Parsing
