@@ -31,3 +31,4 @@ Number | Name | Language | Important topics
 23 | Generic Min Heap | C/C++ | Minimum heaps, priority queue, memory allocation, pointers
 24 | Generic Hash Maps | C/C++ | Hash Maps, Buckets, Hash Functions, Memory allocation, pointers, efficiency
 25 | Command Line Stocks | Python | APIs, Networking, JSON Parsing, CSV Parsing
+26 | AVL Trees | C/C++ | BST, Self-balancing trees, Tree rotation, memory allocation, pointers
