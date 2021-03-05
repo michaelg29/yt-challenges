@@ -54,6 +54,8 @@ avl *avl_rotateRight(avl *root);
 avl *avl_rotateLeft(avl *root);
 // calcualte the height of a root considering the children's heights
 void avl_recalcHeight(avl *root);
+// get the value stored with a key
+void* avl_get(avl* root, void* key);
 
 /*
     traversal methods

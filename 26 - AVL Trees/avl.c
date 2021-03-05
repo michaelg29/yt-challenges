@@ -278,8 +278,6 @@ avl *avl_rotateRight(avl *root)
 // rotate left around a root
 avl *avl_rotateLeft(avl *root)
 {
-    printf("LR around %d\n", *((int *)root->key));
-
     if (!root->right)
     {
         return root;
@@ -302,6 +300,32 @@ void avl_recalcHeight(avl *root)
     if (root)
     {
         root->height = 1 + max(avl_height(root->left), avl_height(root->right));
+    }
+}
+
+// get the value stored with a key
+void *avl_get(avl *root, void *key)
+{
+    if (!root)
+    {
+        return NULL;
+    }
+
+    char cmp = root->keycmp(key, root->key);
+    if (!cmp) // cmp == 0
+    {
+        // found key
+        return root->val;
+    }
+    else if (cmp > 0)
+    {
+        // traverse right
+        return root->right ? avl_get(root->right, key) : NULL;
+    }
+    else // cmp < 0
+    {
+        // traverse left
+        return root->left ? avl_get(root->left, key) : NULL;
     }
 }
 
