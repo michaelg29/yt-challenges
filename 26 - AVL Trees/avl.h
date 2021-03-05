@@ -2,7 +2,7 @@
 #define AVL_H
 
 // max function macro
-#define max(a, b) (a > b ? a : b)
+#define MAX(a, b) (a > b ? a : b)
 
 // avl structure
 typedef struct avl
