@@ -7,11 +7,16 @@
 
 hashmap hmap_allocate(int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2))
 {
-    return hmap_allocateNum(DEFAULT_NUM_BUCKETS, hashfunc, keycmp);
+    return hmap_allocateNumBuckets(DEFAULT_NUM_BUCKETS, hashfunc, keycmp);
 }
 
-hashmap hmap_allocateNum(unsigned int numBuckets, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2))
+hashmap hmap_allocateNumBuckets(unsigned int numBuckets, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2))
 {
+    if (!numBuckets)
+    {
+        numBuckets = DEFAULT_NUM_BUCKETS;
+    }
+
     hashmap ret;
 
     ret.numBuckets = numBuckets;
@@ -28,18 +33,23 @@ hashmap hmap_allocateNum(unsigned int numBuckets, int (*hashfunc)(void *key), in
     return ret;
 }
 
-void hmap_reallocate(hashmap *map)
+hashmap hmap_allocateNumEntries(unsigned int numEntries, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2))
 {
     // find new number of buckets
-    double numBuckets = (double)map->numBuckets;
-    double numEntries = (double)map->numEntries;
+    double numBuckets = DEFAULT_NUM_BUCKETS;
+    double numEntries = (double)numEntries;
     while (numEntries / numBuckets > MAX_LOAD_FACTOR)
     {
         numBuckets *= 2.0;
     }
 
+    return hmap_allocateNumBuckets((unsigned int)numBuckets, hashfunc, keycmp);
+}
+
+void hmap_reallocate(hashmap *map)
+{
     // placeholder to store new set of buckets
-    hashmap ret = hmap_allocateNum(numBuckets, map->hashfunc, map->keycmp);
+    hashmap ret = hmap_allocateNumEntries(map->numEntries, map->hashfunc, map->keycmp);
 
     // traverse through element
     for (unsigned int i = 0; i < map->numBuckets; i++)
