@@ -11,6 +11,11 @@ dynamicarray dynarr_defaultAllocate()
 
 dynamicarray dynarr_allocate(unsigned int capacity)
 {
+    if (!capacity)
+    {
+        capacity = DYNARR_DEFAULT_SIZE;
+    }
+
     dynamicarray ret;
 
     // allocate memory for the array

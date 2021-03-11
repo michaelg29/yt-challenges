@@ -24,7 +24,8 @@ typedef struct hashmap
 } hashmap;
 
 hashmap hmap_allocate(int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2));
-hashmap hmap_allocateNum(unsigned int numBuckets, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2));
+hashmap hmap_allocateNumBuckets(unsigned int numBuckets, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2));
+hashmap hmap_allocateNumEntries(unsigned int numEntries, int (*hashfunc)(void *key), int (*keycmp)(void *key1, void *key2));
 void hmap_reallocate(hashmap *map);
 
 mapentry *hmap_allocateEntryWithHash(void *key, int hash, void *val);
