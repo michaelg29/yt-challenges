@@ -45,7 +45,7 @@ void hmap_freeEntryDeep(mapentry *entry);
 
 // hashmap - string key specific
 hashmap hmap_allocateStrAsKey();
-hashmap hmap_allocateStrAsKeyWithNum(unsigned int numBuckets);
+hashmap hmap_allocateStrAsKeyWithNum(unsigned int numEntries);
 
 int strhash(void *key);
 int strkeycmp(void *key1, void *key2);
