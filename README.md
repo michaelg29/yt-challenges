@@ -32,3 +32,4 @@ Number | Name | Language | Important topics
 24 | Generic Hash Maps | C/C++ | Hash Maps, Buckets, Hash Functions, Memory allocation, pointers, efficiency
 25 | Command Line Stocks | Python | APIs, Networking, JSON Parsing, CSV Parsing
 26 | AVL Trees | C/C++ | BST, Self-balancing trees, Tree rotation, memory allocation, pointers
+27 | String Streams | C/C++ | Strings, memory allocation/reallocation, pointers, file IO
