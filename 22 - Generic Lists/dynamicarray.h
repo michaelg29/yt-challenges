@@ -40,4 +40,13 @@ void dynarr_clear(dynamicarray *list);
 void dynarr_free(dynamicarray *list);
 void dynarr_freeDeep(dynamicarray *list);
 
+typedef struct dynarr_iterator
+{
+    dynamicarray *list;
+    unsigned int cur_idx;
+} dynarr_iterator;
+
+dynarr_iterator dynarr_iterator_new(dynamicarray *hmap);
+void *dynarr_iterator_next(dynarr_iterator *it);
+
 #endif

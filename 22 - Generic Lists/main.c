@@ -37,14 +37,18 @@ int main()
 
     dynamicarray list = dynarr_defaultAllocate();
 
-    for (unsigned int i = 0; i < 5; i++)
+    for (unsigned int i = 0; i < 7; i++)
     {
         dynarr_addLast(&list, arr + i);
     }
 
-    printCharDynarr(&list);
-    printf("%c\n", *((char *)dynarr_removeLast(&list)));
-    printCharDynarr(&list);
+    void *cur = NULL;
+    dynarr_iterator it = dynarr_iterator_new(&list);
+
+    while ((cur = dynarr_iterator_next(&it)))
+    {
+        printChar((char *)cur);
+    }
 
     dynarr_free(&list);
 

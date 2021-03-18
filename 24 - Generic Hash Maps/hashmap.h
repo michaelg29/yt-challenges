@@ -50,4 +50,14 @@ hashmap hmap_allocateStrAsKeyWithNum(unsigned int numEntries);
 int strhash(void *key);
 int strkeycmp(void *key1, void *key2);
 
+typedef struct hashmap_iterator
+{
+    hashmap *hmap;
+    unsigned int cur_bucketIdx;
+    mapentry *cur_entry;
+} hashmap_iterator;
+
+hashmap_iterator hmap_iterator_new(hashmap *hmap);
+mapentry *hmap_iterator_next(hashmap_iterator *it);
+
 #endif

@@ -162,3 +162,18 @@ void dynarr_freeDeep(dynamicarray *list)
     }
     free(list);
 }
+
+dynarr_iterator dynarr_iterator_new(dynamicarray *list)
+{
+    dynarr_iterator ret;
+
+    ret.list = list;
+    ret.cur_idx = 0;
+
+    return ret;
+}
+
+void *dynarr_iterator_next(dynarr_iterator *it)
+{
+    return it->cur_idx < it->list->size ? it->list->list[it->cur_idx++] : NULL;
+}

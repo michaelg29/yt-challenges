@@ -28,11 +28,19 @@ int main()
     hmap_put(&m, "keye", "vale");
     hmap_put(&m, "keyf", "valf");
 
-    printf("%s --> %s\n", "keye", (char *)hmap_get(&m, "keye"));
+    mapentry *cur = NULL;
+    hashmap_iterator it = hmap_iterator_new(&m);
 
-    hmap_put(&m, "keye", "valee");
+    while ((cur = hmap_iterator_next(&it)))
+    {
+        printf("%s --> %s\n", (char *)cur->key, (char *)cur->val);
+    }
 
-    printf("%s --> %s\n", "keye", (char *)hmap_get(&m, "keye"));
+    // printf("%s --> %s\n", "keye", (char *)hmap_get(&m, "keye"));
+
+    // hmap_put(&m, "keye", "valee");
+
+    // printf("%s --> %s\n", "keye", (char *)hmap_get(&m, "keye"));
 
     hmap_freeDeep(&m);
 
