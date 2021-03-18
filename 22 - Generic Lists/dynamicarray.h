@@ -46,7 +46,7 @@ typedef struct dynarr_iterator
     unsigned int cur_idx;
 } dynarr_iterator;
 
-dynarr_iterator dynarr_iterator_new(dynamicarray *hmap);
+dynarr_iterator dynarr_iterator_new(dynamicarray *list);
 void *dynarr_iterator_next(dynarr_iterator *it);
 
 #endif
