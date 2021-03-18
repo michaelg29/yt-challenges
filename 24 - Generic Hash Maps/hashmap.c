@@ -1,7 +1,6 @@
 #include "hashmap.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <math.h>
 
@@ -135,7 +134,6 @@ void hmap_put(hashmap *map, void *key, void *val)
     loadFactor /= (double)map->numBuckets;
     if (loadFactor > MAX_LOAD_FACTOR)
     {
-        printf("reallocate\n");
         hmap_reallocate(map);
     }
 }
@@ -376,4 +374,48 @@ int strkeycmp(void *key1, void *key2)
     char *strkey2 = (char *)key2;
 
     return strcmp(strkey1, strkey2);
+}
+
+hashmap_iterator hmap_iterator(hashmap *hmap)
+{
+    hashmap_iterator ret;
+
+    ret.hmap = hmap;
+    ret.cur_bucketIdx = 0;
+    ret.cur_entry = NULL;
+
+    // find first entry
+    for (; ret.cur_bucketIdx < hmap->numBuckets; ret.cur_bucketIdx++)
+    {
+        if (hmap->buckets[ret.cur_bucketIdx])
+        {
+            ret.cur_entry = hmap->buckets[ret.cur_bucketIdx];
+            break;
+        }
+    }
+
+    return ret;
+}
+
+mapentry *hmap_iterator_next(hashmap_iterator *it)
+{
+    if (it->cur_bucketIdx >= it->hmap->numBuckets)
+    {
+        return NULL;
+    }
+
+    // get current element
+    mapentry *ret = it->cur_entry;
+    mapentry *cur = ret->next;
+
+    for (;
+         !cur && it->cur_bucketIdx < it->hmap->numBuckets;
+         cur = it->hmap->buckets[it->cur_bucketIdx])
+    {
+        it->cur_bucketIdx++;
+    }
+
+    it->cur_entry = cur;
+
+    return ret;
 }
