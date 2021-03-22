@@ -71,9 +71,9 @@ int main() {
 	
 	// free allocated memory
 	for(int i = 0; i < V; i++) {
-            delete[] shortest_paths_tree[i];
+            delete[] shortestPathsTree[i];
     	}
-    	delete[] shortest_paths_tree;
+    	delete[] shortestPathsTree;
 
 	return 0;
 }
