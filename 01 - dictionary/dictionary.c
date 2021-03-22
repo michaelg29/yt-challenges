@@ -13,7 +13,7 @@ typedef struct node {
 } node;
 
 node* root;
-int _size = 0;
+unsigned int _size = 0;
 
 bool load() {
 	// initialize trie
@@ -65,7 +65,7 @@ bool load() {
 	return true;
 }
 
-int size(void) {
+unsigned int size(void) {
 	return _size;
 }
 
