@@ -68,6 +68,12 @@ int main() {
 	int goal = 3;
 
 	std::cout << std::endl << nodes[start] << "->" << nodes[goal] << ": " << calculateDistance(shortestPathsTree, start, goal);
+	
+	// free allocated memory
+	for(int i = 0; i < V; i++) {
+            delete[] shortest_paths_tree[i];
+    	}
+    	delete[] shortest_paths_tree;
 
 	return 0;
 }
