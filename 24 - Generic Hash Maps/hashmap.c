@@ -376,7 +376,7 @@ int strkeycmp(void *key1, void *key2)
     return strcmp(strkey1, strkey2);
 }
 
-hashmap_iterator hmap_iterator(hashmap *hmap)
+hashmap_iterator hmap_iterator_new(hashmap *hmap)
 {
     hashmap_iterator ret;
 
