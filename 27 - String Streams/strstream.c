@@ -51,7 +51,7 @@ char strstream_realloc(strstream *s, unsigned int additionalLength)
 {
     unsigned int newSize = s->size + additionalLength;
 
-    if (newSize + 1 > s->capacity)
+    if (newSize + 1 >= s->capacity)
     {
         // get required size
         unsigned int capacity = s->capacity;
@@ -59,7 +59,7 @@ char strstream_realloc(strstream *s, unsigned int additionalLength)
         {
             capacity = 1;
         }
-        while (capacity < newSize + 1)
+        while (capacity <= newSize + 1)
         {
             capacity <<= 1;
         }
