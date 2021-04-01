@@ -33,3 +33,4 @@ Number | Name | Language | Important topics
 25 | Command Line Stocks | Python | APIs, Networking, JSON Parsing, CSV Parsing
 26 | AVL Trees | C/C++ | BST, Self-balancing trees, Tree rotation, memory allocation, pointers
 27 | String Streams | C/C++ | Strings, memory allocation/reallocation, pointers, file IO
+28 | JSON (Part 2) | C/C++ | structs, memory allocation, hashmaps, dynamic arrays, string streams, weakly typed data
