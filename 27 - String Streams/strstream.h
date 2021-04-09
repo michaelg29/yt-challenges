@@ -24,6 +24,8 @@ char strstream_realloc(strstream *s, unsigned int additionalLength);
     accessors
 */
 unsigned int strstream_available(strstream *s);
+char *strstream_substrLength(strstream *s, unsigned int i, int n);
+char *strstream_substrRange(strstream *s, unsigned int i, unsigned int f);
 
 /*
     modifiers

@@ -99,6 +99,47 @@ unsigned int strstream_available(strstream *s)
     return s->capacity - s->size - 1;
 }
 
+char *strstream_substrLength(strstream *s, unsigned int i, int n)
+{
+    if (n == 0 || i < 0 || i >= s->size || i + n < 0 || i + n >= s->size)
+    {
+        return NULL;
+    }
+
+    unsigned int length = abs(n);
+
+    char *ret = malloc((length + 1) * sizeof(char));
+    if (n > 0)
+    {
+        // copy memory
+        memcpy(ret, s->str + i, length);
+    }
+    else
+    {
+        // copy memory
+        memcpy(ret, s->str + i - length, length);
+
+        // reverse string if negative length
+        for (unsigned int idx = 0; idx < length / 2; idx++)
+        {
+            unsigned int idx2 = length - idx - 1;
+
+            ret[idx] ^= ret[idx2];
+            ret[idx2] = ret[idx] ^ ret[idx2];
+            ret[idx] = ret[idx] ^ ret[idx2];
+        }
+    }
+
+    ret[length] = '\0';
+
+    return ret;
+}
+
+char *strstream_substrRange(strstream *s, unsigned int i, unsigned int f)
+{
+    return strstream_substrLength(s, i, f - i);
+}
+
 /*
     modifiers
 */
