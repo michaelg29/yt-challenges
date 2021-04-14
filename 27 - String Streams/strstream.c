@@ -101,7 +101,7 @@ unsigned int strstream_available(strstream *s)
 
 char *strstream_substrLength(strstream *s, unsigned int i, int n)
 {
-    if (n == 0 || i < 0 || i >= s->size || i + n < 0 || i + n >= s->size)
+    if (n == 0 || i < 0 || i >= s->size || i + n < 0 || i + n > s->size)
     {
         return NULL;
     }
