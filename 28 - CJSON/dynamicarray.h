@@ -14,7 +14,7 @@ dynamicarray dynarr_allocate(unsigned int capacity);
 void dynarr_addAtIdx(dynamicarray *list, void *element, unsigned int idx);
 void dynarr_addFirst(dynamicarray *list, void *element);
 void dynarr_addLast(dynamicarray *list, void *element);
-void dynarr_resize(dynamicarray *list);
+void dynarr_reallocate(dynamicarray *list, unsigned int additionalLength);
 
 void dynarr_set(dynamicarray *list, void *element, unsigned int idx);
 
