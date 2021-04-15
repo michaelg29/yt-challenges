@@ -1,6 +1,7 @@
 #include "dynamicarray.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 #define DYNARR_DEFAULT_SIZE 4
 
@@ -34,11 +35,8 @@ void dynarr_addAtIdx(dynamicarray *list, void *element, unsigned int idx)
         return;
     }
 
-    if (list->size == list->capacity)
-    {
-        // resize if necessary
-        dynarr_resize(list);
-    }
+    // resize if necessary
+    dynarr_reallocate(list, 1);
 
     // right shift elements beyond index to make space
     for (unsigned int i = list->size; i > idx; i--)
@@ -72,22 +70,61 @@ void dynarr_set(dynamicarray *list, void *element, unsigned int idx)
     list->list[idx] = element;
 }
 
-void dynarr_resize(dynamicarray *list)
+void dynarr_reallocate(dynamicarray *list, unsigned int additionalLength)
 {
-    // allocate memory (double capacity)
-    void **newList = malloc((list->capacity * 2) * sizeof(void *));
+    unsigned int newSize = list->size + additionalLength;
 
-    // copy elements
-    for (unsigned int i = 0; i < list->size; i++)
+    if (newSize > list->capacity)
     {
-        newList[i] = list->list[i];
+        // get required capacity
+        unsigned int capacity = list->capacity;
+        if (!capacity)
+        {
+            capacity = 1;
+        }
+        while (capacity < newSize)
+        {
+            capacity <<= 1;
+        }
+
+        // must reallocate
+        void **newMem = realloc(list->list, capacity * sizeof(void *));
+        if (!newMem)
+        {
+            // allocate in new location
+            newMem = malloc(capacity * sizeof(void *));
+            memcpy(newMem, list->list, capacity * sizeof(void *));
+
+            // update pointers
+            free(list->list);
+            list->list = newMem;
+        }
+        else if (newMem != list->list)
+        {
+            // reallocated in a new location
+            // update pointers
+
+            free(list->list);
+            list->list = newMem;
+        }
+
+        list->capacity = capacity;
     }
 
-    // update pointer
-    free(list->list);
-    list->list = newList;
-    // double size
-    list->capacity <<= 1;
+    // allocate memory (double capacity)
+    // void **newList = malloc((list->capacity * 2) * sizeof(void *));
+
+    // // copy elements
+    // for (unsigned int i = 0; i < list->size; i++)
+    // {
+    //     newList[i] = list->list[i];
+    // }
+
+    // // update pointer
+    // free(list->list);
+    // list->list = newList;
+    // // double size
+    // list->capacity <<= 1;
 }
 
 void *dynarr_removeAtIdx(dynamicarray *list, unsigned int idx)
