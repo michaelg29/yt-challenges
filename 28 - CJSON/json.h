@@ -11,8 +11,8 @@
 typedef char bool;
 #define false 0
 #define true !0
-#define JSON_TRUE "true"
-#define JSON_FALSE "false"
+#define JSON_TRUE_S "true"
+#define JSON_FALSE_S "false"
 
 #define JSON_NULL_S "null"
 
@@ -56,6 +56,9 @@ json json_list(dynamicarray val);
 json json_arr(json *first, unsigned int n);
 json json_obj(hashmap val);
 
+json *json_alloc_typeSize(jsontype type, unsigned int n);
+json *json_alloc_type(jsontype type);
+
 /*
     list modifiers
 */
@@ -77,6 +80,12 @@ void json_obj_put_int(json *obj, char *key, int val);
 void json_obj_put_bool(json *obj, char *key, bool val);
 
 /*
+    value accessors
+*/
+json *json_list_get(json *list, unsigned int idx);
+json *json_obj_get(json *obj, char *key);
+
+/*
     output accessors
 */
 strstream json_stringify(json j, bool prettify, int initTabPos, bool isDictVal);
@@ -87,5 +96,13 @@ char *json_dump(json j, bool prettify, int *n);
 */
 void json_free(json *j);
 void json_freeDeep(json *j);
+
+/*
+    File IO
+*/
+void json_writeFileObj(json j, FILE *fp, bool prettify);
+void json_writeFile(json j, char *path, bool prettify);
+json json_readFileObj(FILE *fp);
+json json_readFile(char *path);
 
 #endif
