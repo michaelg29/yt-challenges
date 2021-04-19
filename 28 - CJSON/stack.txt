@@ -1,0 +1,24 @@
+CHAR/TOKEN  STACK               ACTION
+{           OBJ                 start obj, start key
+"list1"     OBJ                 store string in key
+:           OBJ                 end key, start value
+[           OBJ, LIST           start list, start value
+"str1"      OBJ, LIST           store string in value
+,           OBJ, LIST           end value, add string to list
+1.29        OBJ, LIST           store number in value
+,           OBJ, LIST           end value, add number to list
+null        OBJ, LIST           store null in value
+]           OBJ                 add null to list, pop list as value
+,           OBJ                 end value, store key-value pair
+...
+"float"     OBJ                 store string in key
+:           OBJ                 end key, start value
+155....     OBJ                 store number in value
+,           OBJ                 end value, store key-value pair
+"str123"    OBJ                 store string in key
+:           OBJ                 end key, start value
+"asdf"      OBJ                 store string in value
+}                               store key-value, pop obj as value
+\0                              return value (obj)
+
+{ [ " , ] } numbers null false true

@@ -1,0 +1,16 @@
+{
+    "list1": [
+        "str1",
+        1.290000,
+        null
+    ],
+    "list2": [
+        null
+    ],
+    "list3": [],
+    "float": 15325.299805,
+    "str123": "asdfasdgf",
+    "obj2": {
+        "test1": 124
+    }
+}
