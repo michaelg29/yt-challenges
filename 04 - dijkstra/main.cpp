@@ -1,7 +1,7 @@
 #include <iostream>
 #include <limits.h>
 #include <vector>
-#include <map>
+#include <algorithm>
 
 #define V 7
 
@@ -68,6 +68,12 @@ int main() {
 	int goal = 3;
 
 	std::cout << std::endl << nodes[start] << "->" << nodes[goal] << ": " << calculateDistance(shortestPathsTree, start, goal);
+	
+	// free allocated memory
+	for(int i = 0; i < V; i++) {
+            delete[] shortestPathsTree[i];
+        }
+        delete[] shortestPathsTree;
 
 	return 0;
 }
