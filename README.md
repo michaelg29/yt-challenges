@@ -34,3 +34,4 @@ Number | Name | Language | Important topics
 26 | AVL Trees | C/C++ | BST, Self-balancing trees, Tree rotation, memory allocation, pointers
 27 | String Streams | C/C++ | Strings, memory allocation/reallocation, pointers, file IO
 28 | JSON (Part 2) | C/C++ | structs, memory allocation, hashmaps, dynamic arrays, string streams, weakly typed data
+29 | Winsock | C/C++ | Windows SDK, Winsock API, Networking, Server/Client Communications
