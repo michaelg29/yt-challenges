@@ -35,3 +35,4 @@ Number | Name | Language | Important topics
 27 | String Streams | C/C++ | Strings, memory allocation/reallocation, pointers, file IO
 28 | JSON (Part 2) | C/C++ | structs, memory allocation, hashmaps, dynamic arrays, string streams, weakly typed data
 29 | Winsock | C/C++ | Windows SDK, Winsock API, Networking, Server/Client Communications
+30 | B-Tree | C | Tree, Databases, Data Structures, Recursion, Reverse Recursion, Memory Management
