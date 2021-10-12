@@ -9,7 +9,7 @@
   "author": "Michael Grieco",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.0.5"
+    "electron": "^11.5.0"
   },
   "dependencies": {
     "jquery": "^3.5.1"
