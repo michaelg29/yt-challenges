@@ -38,7 +38,7 @@ void btree_moveKeyVal(btree_node *in, int inIdx, btree_node *out, int outIdx);
 
 btree_node *btree_node_search(btree_node *root, int key, int *idx);
 
-void btree_node_split(btree_node *root, btree tree, btree_node *newNode, int i);
+btree_node *btree_node_split(btree_node *root, btree tree, btree_node *newNode, int i);
 btree_node *btree_node_insert(btree_node *root, btree tree, int key, void *val);
 
 void btree_node_free(btree_node *root, btree tree);
