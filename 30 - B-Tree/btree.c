@@ -141,8 +141,8 @@ btree_node *btree_node_split(btree_node *root, btree tree, btree_node *new_node,
     int hasChildren = root->noChildren;
     // returns upshift element in new_node
 
-    btree_node* tmp = btree_newNode(tree);
-    memcpy(tmp->children, new_node->children, 2 * sizeof(btree_node*));
+    btree_node *tmp = btree_newNode(tree);
+    memcpy(tmp->children, new_node->children, 2 * sizeof(btree_node *));
     // swap new node with corresponding node to be upshifted
     if (i < tree.t - 1)
     {
