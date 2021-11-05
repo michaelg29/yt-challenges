@@ -6,22 +6,29 @@
 
 void printBtree(btree_node *root)
 {
-    printf("( ");
-
-    for (int i = 0; i < root->n; i++)
+    if (root)
     {
+        printf("( ");
+
+        for (int i = 0; i < root->n; i++)
+        {
+            if (root->noChildren)
+            {
+                printBtree(root->children[i]);
+            }
+            printf(" %d ", root->keys[i]);
+        }
         if (root->noChildren)
         {
-            printBtree(root->children[i]);
+            printBtree(root->children[root->n]);
         }
-        printf(" %d ", root->keys[i]);
-    }
-    if (root->noChildren)
-    {
-        printBtree(root->children[root->n]);
-    }
 
-    printf(" )");
+        printf(" )");
+    }
+    else
+    {
+        printf("<>");
+    }
 }
 
 int main()
@@ -30,14 +37,31 @@ int main()
 
     btree tree = btree_new(3);
 
-    int keys[7] = {8, 9, 10, 11, 15, 20, 17};
-    for (int i = 0; i < 7; i++)
+#define INSERTLEN 20
+    int insertElements[INSERTLEN] = {25, 8, 37, 55, 95, 27, 88, 13, 29, 42, 51, 72, 100, 105, 90, 92, 50, 49, 45, 47};
+
+    int i;
+    for (i = 0; i < INSERTLEN; i++)
     {
-        btree_insert(&tree, keys[i], NULL);
-        printf("+%04d: ", keys[i]);
+        btree_insert(&tree, insertElements[i], NULL);
+    }
+    printBtree(tree.root);
+    printf("\n");
+
+#define DELETELEN 16
+    int deleteElements[DELETELEN] = {27, 29, 88, 100, 51, 90, 37, 95, 72, 42, 92, 8, 55, 13, 105, 25};
+    for (i = 0; i < DELETELEN - 1; i++)
+    {
+        btree_delete(&tree, deleteElements[i]);
+        printf("-%04d: ", deleteElements[i]);
         printBtree(tree.root);
         printf("\n");
     }
+
+    btree_delete(&tree, deleteElements[i]);
+    printf("-%04d: ", deleteElements[i]);
+    printBtree(tree.root);
+    printf("\n");
 
     btree_free(&tree);
 
