@@ -1,7 +1,7 @@
 #ifndef BTREE_H
 #define BTREE_H
 
-#define BTREE_MIN_M 2
+#define BTREE_MIN_M 3
 
 typedef struct btree_node
 {
