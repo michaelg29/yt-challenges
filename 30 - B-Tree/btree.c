@@ -231,6 +231,8 @@ btree_node *btree_node_split(btree_node *root, btree tree, btree_node *new_node,
     new_node->children[1]->n = tree.m - tree.t;
     new_node->n = 1;
     new_node->noChildren = 2;
+
+    btree_node_freeShallow(tmp);
 }
 
 btree_node *btree_node_insert(btree_node *root, btree tree, int key, void *val)
