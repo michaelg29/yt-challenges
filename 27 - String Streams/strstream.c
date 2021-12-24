@@ -169,8 +169,7 @@ void strstream_concat(strstream *s, const char *format, ...)
 
 void strstream_read(strstream *s, void *data, unsigned int length)
 {
-    // +1 for terminator because not accounted for in raw memory length
-    strstream_realloc(s, length + 1);
+    strstream_realloc(s, length);
 
     // copy memory
     memcpy(s->str + s->size, data, length);
