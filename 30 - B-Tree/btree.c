@@ -66,6 +66,8 @@ void btree_delete(btree *tree, int key)
 void btree_free(btree *tree)
 {
     btree_node_free(tree->root, *tree);
+
+    tree->root = NULL;
 }
 
 // BTREE_NODE
