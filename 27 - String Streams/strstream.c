@@ -240,6 +240,13 @@ void strstream_concat(strstream *s, const char *format, ...)
 {
     va_list args;
 
+    if (!s->str)
+    {
+        s->str = malloc(STRSTREAM_DEFAULT_SIZE);
+        s->capacity = STRSTREAM_DEFAULT_SIZE;
+        s->size = 0;
+    }
+
     unsigned int available = strstream_available(s);
     va_start(args, format);
     int formatSize = vsnprintf(s->str + s->size, available * sizeof(char), format, args);
