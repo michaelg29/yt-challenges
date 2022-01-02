@@ -213,15 +213,16 @@ unsigned int strstream_indexOf(strstream *s, char c, int initIdx)
         return -1;
     }
 
-    for (int i = initIdx; i < s->size; i++)
+    int i = initIdx;
+    for (; i < s->size; i++)
     {
         if (s->str[i] == c)
         {
-            return i;
+            break;
         }
     }
 
-    return -1;
+    return i;
 }
 
 /*
