@@ -42,6 +42,7 @@ strstream strstream_fromStr(char *str)
     {
         memcpy(ret.str, str, size * sizeof(char));
         ret.size = size;
+        strstream_terminate(&ret);
     }
 
     return ret;
