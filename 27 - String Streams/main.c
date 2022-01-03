@@ -36,7 +36,7 @@ int main()
     s = strstream_fromStr("hello this is a string with spaces");
 
     char **list;
-    int n = strstream_split(&s, ' ', &list);
+    int n = strstream_split(&s, ' ', &list, 4);
 
     printf("%d strings\n", n);
     for (int i = 0; i < n; i++)

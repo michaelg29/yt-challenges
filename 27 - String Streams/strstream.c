@@ -153,39 +153,58 @@ void addStringToList(char ***list, int n, char *str, int strLen)
     *list = tmp;
 }
 
-int strstream_split(strstream *s, char regex, char ***out)
+int strstream_split(strstream *s, char regex, char ***out, int maxN)
 {
     char **ret = NULL;
     int n = 0;
 
     if (s && s->str && s->size)
     {
-        unsigned int startIdx = 0;
-
-        for (int i = 0; i < s->size; i++)
+        if (maxN == 1)
         {
-            if (s->str[i] == regex)
-            {
-                int strLen = i - startIdx;
-                if (!strLen)
-                {
-                    startIdx = i + 1;
-                    continue;
-                }
+            // only one return string, so return entire string
+            ret = malloc(1 * sizeof(char*));
+            ret[0] = malloc(s->size + 1);
+            memcpy(ret[0], s->str, s->size + 1);
 
-                // add string
-                addStringToList(&ret, n, s->str + startIdx, strLen);
-                n++;
-
-                startIdx = i + 1;
-            }
+            n = 1;
         }
-
-        if (startIdx != s->size)
+        else
         {
-            // add last string
-            addStringToList(&ret, n, s->str + startIdx, s->size - startIdx);
-            n++;
+            // cursor
+            unsigned int startIdx = 0;
+
+            for (int i = 0; i < s->size; i++)
+            {
+                if (s->str[i] == regex)
+                {
+                    int strLen = i - startIdx;
+                    if (!strLen)
+                    {
+                        startIdx = i + 1;
+                        continue;
+                    }
+
+                    // add string
+                    addStringToList(&ret, n, s->str + startIdx, strLen);
+                    n++;
+
+                    startIdx = i + 1;
+
+                    if (maxN > 0 && n == maxN - 1)
+                    {
+                        // add rest of string
+                        break;
+                    }
+                }
+            }
+
+            if (startIdx != s->size)
+            {
+                // add last string
+                addStringToList(&ret, n, s->str + startIdx, s->size - startIdx);
+                n++;
+            }
         }
     }
 
