@@ -1,0 +1,1 @@
+for /f "tokens=2 delims=[]" %a in ('ping -n 1 -4 "%computername%"') do @echo %a
