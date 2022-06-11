@@ -37,3 +37,4 @@ Number | Name | Language | Important topics
 29 | Winsock | C/C++ | Windows SDK, Winsock API, Networking, Server/Client Communications
 30 | B-Tree | C | Tree, Databases, Data Structures, Recursion, Reverse Recursion, Memory Management
 31 | HTTP Server | C | Networking, file IO, Winsock API, HTTP requests and responses
+32 | Static File Server | C# | Netorking, file IO, asynchronous functions, HTTP, exception handling
