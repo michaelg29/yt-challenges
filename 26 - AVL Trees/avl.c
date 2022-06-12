@@ -338,47 +338,56 @@ void *avl_get(avl *root, void *key)
 // inorder traversal
 void avl_inorderTraverse(avl *root, void (*visit)(avl *node))
 {
-    if (root->left)
+    if (root)
     {
-        avl_inorderTraverse(root->left, visit);
-    }
+        if (root->left)
+        {
+            avl_inorderTraverse(root->left, visit);
+        }
 
-    visit(root);
+        visit(root);
 
-    if (root->right)
-    {
-        avl_inorderTraverse(root->right, visit);
+        if (root->right)
+        {
+            avl_inorderTraverse(root->right, visit);
+        }
     }
 }
 
 // preorder traversal
 void avl_preorderTraverse(avl *root, void (*visit)(avl *node))
 {
-    visit(root);
+    if (root)
+    {
+        visit(root);
 
-    if (root->left)
-    {
-        avl_preorderTraverse(root->left, visit);
-    }
-    if (root->right)
-    {
-        avl_preorderTraverse(root->right, visit);
+        if (root->left)
+        {
+            avl_preorderTraverse(root->left, visit);
+        }
+        if (root->right)
+        {
+            avl_preorderTraverse(root->right, visit);
+        }
     }
 }
 
 // postorder traversal
 void avl_postorderTraverse(avl *root, void (*visit)(avl *node))
 {
-    if (root->left)
+    if (root)
     {
-        avl_postorderTraverse(root->left, visit);
-    }
-    if (root->right)
-    {
-        avl_postorderTraverse(root->right, visit);
-    }
+        if (root->left)
+        {
+            avl_postorderTraverse(root->left, visit);
+        }
+        if (root->right)
+        {
+            avl_postorderTraverse(root->right, visit);
+        }
 
-    visit(root);
+        visit(root);
+    }
 }
 
 /*
