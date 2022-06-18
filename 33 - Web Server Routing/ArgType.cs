@@ -17,6 +17,20 @@ namespace WebServerRouting
             new ArgType(typeof(bool), s => bool.Parse(s), "bool")
         };
 
+        public static void RegisterType<T>(Func<string, object> parser, params string[] altNames)
+        {
+            ArgType existingArgType = argTypes.Where(at => at.Type == typeof(T)).SingleOrDefault();
+            if (existingArgType != null)
+            {
+                existingArgType.Parser = parser;
+                existingArgType.AltNames.Concat(altNames);
+            }
+            else
+            {
+                argTypes.Add(new ArgType(typeof(T), parser, altNames));
+            }
+        }
+
         public static bool TryParse(string valStr, out object val, out Type type)
         {
             // priority at top of list
