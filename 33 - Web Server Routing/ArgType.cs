@@ -56,9 +56,20 @@ namespace WebServerRouting
 
         public static bool TryParse<T>(string valStr, out T val)
         {
+            val = default;
+            if (TryParse(typeof(T), valStr, out object objVal))
+            {
+                val = (T)objVal;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool TryParse(Type type, string valStr, out object val)
+        {
             try
             {
-                val = (T)GetArgType(typeof(T)).Parser(valStr);
+                val = GetArgType(type).Parser(valStr);
                 return true;
             }
             catch
