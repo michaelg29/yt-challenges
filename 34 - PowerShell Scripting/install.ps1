@@ -1,4 +1,3 @@
-# Set this module name
 $MODULE_NAME="utils"
 
 # Get profile
@@ -8,8 +7,8 @@ if (-Not (Test-Path $Profile))
 }
 echo "Profile exists at $Profile"
 
-# Create module directory in profile directory
-$dir=(get-item $Profile).Directory.FullName
+# Create module directory
+$dir=(Get-Item $Profile).Directory.FullName
 $dir+="\Modules\$MODULE_NAME"
 if (-Not (Test-Path $dir))
 {
@@ -17,11 +16,12 @@ if (-Not (Test-Path $dir))
 }
 echo "Module directory exists at $dir"
 
-# Copy module script to module directory
-Copy-Item .\utils.psm1 -Destination $dir\$MODULE_NAME.psm1
+# Copy module to directory
+Copy-Item .\$MODULE_NAME.psm1 -Destination $dir\$MODULE_NAME.psm1
 
 # Automatically import profile on startup
-if (-Not ((Get-Content $Profile) -like "*Import-Module $MODULE_NAME*"))
+$import="Import-Module $MODULE_NAME"
+if (-Not ((Get-Content $Profile) -like "*$import*"))
 {
-    Add-Content -Path $Profile -Value "Import-Module $MODULE_NAME"
+    Add-Content -Path $Profile -Value $import
 }
