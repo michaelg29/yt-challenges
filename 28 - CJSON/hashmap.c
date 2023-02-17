@@ -84,6 +84,8 @@ mapentry *hmap_allocateEntryWithHash(void *key, int hash, void *val)
     ret->hash = hash;
     ret->val = val;
     ret->next = NULL;
+
+    return ret;
 }
 
 void hmap_put(hashmap *map, void *key, void *val)
@@ -142,7 +144,7 @@ void *hmap_get(hashmap *map, void *key)
 {
     mapentry *entry = hmap_getEntry(map, key);
 
-    return entry ? entry->val : NULL;
+    return (int)entry ? entry->val : NULL;
 }
 
 mapentry *hmap_getEntry(hashmap *map, void *key)
@@ -156,7 +158,7 @@ mapentry *hmap_getEntry(hashmap *map, void *key)
         // traverse through bucket
         mapentry *current = map->buckets[idx];
 
-        while (current)
+        while ((int)current)
         {
             if (hash < current->hash)
             {
@@ -397,9 +399,10 @@ hashmap_iterator hmap_iterator_new(hashmap *hmap)
     return ret;
 }
 
+#include <stdio.h>
 mapentry *hmap_iterator_next(hashmap_iterator *it)
 {
-    if (it->cur_bucketIdx >= it->hmap->numBuckets)
+    if (!(int)(it->cur_entry) || it->cur_bucketIdx >= it->hmap->numBuckets)
     {
         return NULL;
     }

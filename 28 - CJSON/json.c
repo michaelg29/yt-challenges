@@ -256,7 +256,7 @@ void json_obj_put_bool(json *obj, char *key, bool val)
 */
 json *json_list_get(json *list, unsigned int idx)
 {
-    if (list->type != JSON_LIST || idx >= list->val.l.size)
+    if (!(int)list || list->type != JSON_LIST || idx >= list->val.l.size)
     {
         return NULL;
     }
