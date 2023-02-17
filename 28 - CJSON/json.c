@@ -463,7 +463,7 @@ void json_freeDeep(json *j)
 {
     if (j->type == JSON_STR)
     {
-        free(&j->val.s);
+        free(j->val.s);
     }
     else if (j->type == JSON_LIST)
     {
@@ -542,13 +542,13 @@ json json_readFileObj(FILE *fp)
 
         char c = str.str[i];
 
-        if (c == ' ' || c == '\n' || c == '\t' || c == ':')
+        if (c <= ' ' || c == ':')
         {
             // skip whitespace
             continue;
         }
 
-        printf("%c ", c);
+        printf("%c %d ", c, c);
 
         bool valid = true;
 
